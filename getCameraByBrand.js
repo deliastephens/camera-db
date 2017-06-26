@@ -16,13 +16,11 @@ loadHTML = function(url) {
 }
 
 // get array of camera names for each page
-getCamNames = function(html) {
+getCamDetails = function(html) {
   let camNames = [];
   html(".newest_2 a").each(function(i, elem) {
     camNames[i] = elem.children[0].data.trim();
   });
-
-  console.log(camNames);
   return Promise.resolve(camNames);
 }
 
@@ -51,11 +49,13 @@ generatePageUrls = function(html){
 
 // scrapes single page for camera names
 scrapePage = function(urls){
+  let allCameraNames = [];
   for(var i = 0; i < urls.length; i++){
     loadHTML(urls[i])
-      .then(getCamNames)
+      .then(getCamDetails)
       .catch(error => console.log(error.message));
   }
+  return Promise.resolve(allCameraNames);
 }
 
 // scrapes all pages of site given the base brand url
@@ -63,4 +63,5 @@ exports.scrapeAllPages = function(url) {
   loadHTML(url)
     .then(generatePageUrls)
     .then(scrapePage)
+    .then(fulfilled => console.log(fulfilled))
 }

@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/deliastephens/camera-db/issues"
   },
-  "homepage": "https://github.com/deliastephens/camera-db#readme"
+  "homepage": "https://github.com/deliastephens/camera-db#readme",
+  "dependencies": {
+    "mysql": "^2.13.0"
+  }
 }
